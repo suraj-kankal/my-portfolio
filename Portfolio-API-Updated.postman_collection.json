@@ -1,0 +1,211 @@
+{
+  "info": {
+    "name": "Suraj's Portfolio API",
+    "description": "Test Suraj's Portfolio APIs - Your actual data from Portfolio.html",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "📍 SERVER INFO",
+      "item": [
+        {
+          "name": "Home - Server Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔓 PUBLIC ENDPOINTS",
+      "description": "No authentication required - Uses YOUR actual portfolio data",
+      "item": [
+        {
+          "name": "1️⃣  Get All Portfolio Data",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/portfolio",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "portfolio"]
+            },
+            "description": "Your name, title, skills, experience, and education"
+          }
+        },
+        {
+          "name": "2️⃣  Get Your Skills",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/skills",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "skills"]
+            }
+          }
+        },
+        {
+          "name": "3️⃣  Get Your Experience",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/experience",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "experience"]
+            }
+          }
+        },
+        {
+          "name": "4️⃣  Get Your Education",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/education",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "education"]
+            }
+          }
+        },
+        {
+          "name": "5️⃣  Submit Contact Form",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"subject\": \"Interested in Collaboration\",\n  \"message\": \"I'd like to work with you on a project!\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/contact",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "contact"]
+            },
+            "description": "Submit contact form - No authentication needed"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔒 PROTECTED ENDPOINTS (Authentication Required)",
+      "description": "Requires Authorization header with token",
+      "item": [
+        {
+          "name": "6️⃣  Get Private Data (Admin Only)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer admin_token_12345",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/private-data",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "private-data"]
+            },
+            "description": "Get sensitive data. REQUIRES token. This is HIDDEN from browser inspect!"
+          }
+        },
+        {
+          "name": "7️⃣  Admin - Update Portfolio",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer admin_token_12345",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"update_skills\",\n  \"payload\": {\n    \"newSkill\": \"Docker\"\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/admin",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "admin"]
+            },
+            "description": "Admin only - update portfolio"
+          }
+        }
+      ]
+    },
+    {
+      "name": "❌ ERROR CASES",
+      "item": [
+        {
+          "name": "Try without token",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/private-data",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "private-data"]
+            },
+            "description": "Should return 401 Unauthorized"
+          }
+        },
+        {
+          "name": "Try with wrong token",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer wrong_token",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/private-data",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "private-data"]
+            },
+            "description": "Should return 403 Forbidden"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,344 @@
+{
+  "info": {
+    "name": "Suraj's Portfolio API - With Database",
+    "description": "Complete API with SQLite Database Integration",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "📍 SERVER INFO",
+      "item": [
+        {
+          "name": "Home - Server & Database Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔓 PUBLIC ENDPOINTS",
+      "description": "No authentication required",
+      "item": [
+        {
+          "name": "1️⃣  Get All Portfolio Data",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/portfolio",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "portfolio"]
+            }
+          }
+        },
+        {
+          "name": "2️⃣  Get Your Skills",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/skills",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "skills"]
+            }
+          }
+        },
+        {
+          "name": "3️⃣  Get Your Experience",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/experience",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "experience"]
+            }
+          }
+        },
+        {
+          "name": "4️⃣  Get Your Education",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/education",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "education"]
+            }
+          }
+        },
+        {
+          "name": "5️⃣  Submit Contact Form",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"subject\": \"Collaboration Opportunity\",\n  \"message\": \"I'd like to discuss a project opportunity with you!\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/contact",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "contact"]
+            },
+            "description": "Submit contact form - Data is SAVED to SQLite Database"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔒 PROTECTED ENDPOINTS (Admin Only)",
+      "description": "Requires Authorization: Bearer admin_token_12345",
+      "item": [
+        {
+          "name": "6️⃣  Get Private Data",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer admin_token_12345",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/private-data",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "private-data"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "📊 DATABASE OPERATIONS (Admin)",
+      "description": "View and manage contact submissions - Requires Authentication",
+      "item": [
+        {
+          "name": "7️⃣  View ALL Contacts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer admin_token_12345",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/admin/contacts",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "admin", "contacts"]
+            },
+            "description": "Get all contact submissions from database with statistics"
+          }
+        },
+        {
+          "name": "8️⃣  View NEW Contacts Only",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer admin_token_12345",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/admin/contacts/new",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "admin", "contacts", "new"]
+            },
+            "description": "Get only unread/new contact submissions"
+          }
+        },
+        {
+          "name": "9️⃣  View Specific Contact",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer admin_token_12345",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/admin/contacts/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "admin", "contacts", "1"]
+            },
+            "description": "Get a specific contact by ID (replace 1 with actual ID)"
+          }
+        },
+        {
+          "name": "🔟  Update Contact Status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer admin_token_12345",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"replied\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/admin/contacts/1/status",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "admin", "contacts", "1", "status"]
+            },
+            "description": "Update status: new, replied, or archived (replace 1 with ID)"
+          }
+        },
+        {
+          "name": "1️⃣1️⃣  Delete Contact",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer admin_token_12345",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/admin/contacts/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "admin", "contacts", "1"]
+            },
+            "description": "Delete a contact from database (replace 1 with ID)"
+          }
+        },
+        {
+          "name": "1️⃣2️⃣  View Statistics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer admin_token_12345",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/admin/stats",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "admin", "stats"]
+            },
+            "description": "View contact statistics: total, new, today"
+          }
+        }
+      ]
+    },
+    {
+      "name": "❌ ERROR CASES",
+      "item": [
+        {
+          "name": "Missing Authentication Token",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/admin/contacts",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "admin", "contacts"]
+            },
+            "description": "Try without token - should get 401 error"
+          }
+        },
+        {
+          "name": "Invalid Authentication Token",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer wrong_token_123",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/admin/contacts",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "admin", "contacts"]
+            },
+            "description": "Try with wrong token - should get 403 error"
+          }
+        },
+        {
+          "name": "Missing Required Fields",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/contact",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "contact"]
+            },
+            "description": "Send incomplete contact form - should get 400 error"
+          }
+        }
+      ]
+    }
+  ]
+}
